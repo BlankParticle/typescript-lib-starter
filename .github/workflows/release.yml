@@ -1,0 +1,50 @@
+name: Release 🚀 
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    name: Release 🚀
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo 🛎
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm 📦
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js 🟩
+        uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          node-version: "20"
+
+      - name: Install Dependencies 📦
+        run: pnpm install --frozen-lockfile
+
+      - name: Build 🏗
+        run: pnpm build
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm changeset:release
+          version: pnpm changeset:version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

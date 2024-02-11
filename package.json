@@ -1,0 +1,52 @@
+{
+  "name": "typescript-lib-starter",
+  "version": "0.0.0",
+  "description": "A type-safe env ensuring library",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs",
+    "types": "./dist/index.d.ts"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "fix": "biome lint --apply .",
+    "changeset:version": "changeset version",
+    "changeset:release": "changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.11.17",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BlankParticle/typescript-lib-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/BlankParticle/typescript-lib-starter/issues"
+  },
+  "homepage": "https://github.com/BlankParticle/typescript-lib-starter",
+  "keywords": ["env", "zod", "type-safe", "dotenv"],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/BlankParticle"
+    }
+  ],
+  "author": {
+    "name": "BlankParticle",
+    "email": "blankparticle@gmail.com",
+    "url": "https://blankparticle.in"
+  },
+  "license": "MIT"
+}
